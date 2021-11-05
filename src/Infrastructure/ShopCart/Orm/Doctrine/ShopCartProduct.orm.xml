@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="App\Domain\ShopCart\ShopCartProduct" table="shop_carts_products">
+                <embedded name="identity" class="App\Domain\ShopCart\ValueObject\ShopCartProductIdentity" use-column-prefix="false"/>
+                <field name="quantity" type="integer" column="quantity" />
+                <embedded name="money" class="App\Domain\ShopCart\ValueObject\Money" use-column-prefix="false"/>
+                <many-to-one field="shopCart" target-entity="App\Domain\ShopCart\ShopCart" inversed-by="products">
+                        <join-column name="shop_cart_uuid" referenced-column-name="uuid" />
+                </many-to-one>
+                <many-to-one field="product" target-entity="App\Domain\Product\Product" inversed-by="products">
+                        <join-column name="product_uuid" referenced-column-name="uuid" />
+                </many-to-one>
+        </entity>
+</doctrine-mapping>

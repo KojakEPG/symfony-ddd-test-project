@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      ShopCart:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Infrastructure/ShopCart/Orm/Doctrine'
+        prefix: 'App\Domain\ShopCart'
+        alias: ShopCart

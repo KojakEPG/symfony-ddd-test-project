@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Domain\Product\Product" table="products">
+        <id name="uuid" type="string" column="uuid" length="36"/>
+        <embedded name="info" class="App\Domain\Product\ValueObject\Info" use-column-prefix="false"/>
+        <embedded name="money" class="App\Domain\Product\ValueObject\Money" use-column-prefix="false"/>
+        <embedded name="status" class="App\Domain\Product\ValueObject\Status" use-column-prefix="false"/>
+    </entity>
+</doctrine-mapping>

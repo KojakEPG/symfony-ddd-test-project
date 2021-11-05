@@ -1,0 +1,8 @@
+api_controllers:
+    resource: '../../src/UserInterface/Api/'
+    type: annotation
+    prefix: /api
+
+kernel:
+    resource: '../../src/Infrastructure/Kernel.php'
+    type: annotation

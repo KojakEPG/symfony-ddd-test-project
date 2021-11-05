@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Application\UseCase\Command\Product\Create;
+
+use App\Domain\Product\Factory\ProductFactory;
+use App\Domain\Product\Repository\WriteModelRepositoryInterface;
+use App\Infrastructure\SharedKernel\MessageBus\Command\CommandHandlerInterface;
+use App\Infrastructure\SharedKernel\MessageBus\Event\EventBus;
+use Money as LibMoney;
+
+final class CreateCommandHandler implements CommandHandlerInterface
+{
+    private WriteModelRepositoryInterface $writeModelRepository;
+
+    private EventBus $eventBus;
+
+    public function __construct(
+        WriteModelRepositoryInterface $writeModelRepository,
+        EventBus $eventBus
+    ) {
+        $this->writeModelRepository = $writeModelRepository;
+        $this->eventBus = $eventBus;
+    }
+
+    public function __invoke(CreateCommand $command): void
+    {
+        $money = new LibMoney\Money((int)(100 * $command->getAmount()), new LibMoney\Currency($command->getCurrencyCode()));
+
+        $product = ProductFactory::createNewProduct(
+            $command->getUuid(),
+            $command->getName(),
+            $command->getDescription(),
+            $money
+        );
+
+        $product->create();
+
+        $this->writeModelRepository->storeProduct($product);
+
+        $product->publishDomainEvents($this->eventBus);
+    }
+}

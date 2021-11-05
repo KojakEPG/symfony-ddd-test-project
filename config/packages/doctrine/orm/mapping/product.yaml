@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      Product:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Infrastructure/Product/Orm/Doctrine'
+        prefix: 'App\Domain\Product'
+        alias: Product

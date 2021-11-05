@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <embeddable name="App\Domain\ShopCart\ValueObject\ShopCartProductIdentity">
+        <id name="shopCartUuid" type="string" column="shop_cart_uuid" length="36"/>
+        <id name="productUuid" type="string" column="product_uuid" length="36"/>
+    </embeddable>
+</doctrine-mapping>

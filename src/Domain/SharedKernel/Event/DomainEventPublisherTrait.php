@@ -29,4 +29,10 @@ trait DomainEventPublisherTrait
     {
         $this->domainEvents = [];
     }
+
+    /** @return DomainEventInterface[] */
+    public function getDomainEvents(): array
+    {
+        return $this->domainEvents;
+    }
 }

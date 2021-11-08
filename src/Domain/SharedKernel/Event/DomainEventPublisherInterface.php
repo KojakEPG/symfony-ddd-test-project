@@ -13,4 +13,7 @@ interface DomainEventPublisherInterface
     public function registerDomainEvent(DomainEventInterface $domainEvent): void;
 
     public function clearDomainEvents(): void;
+
+    /** @return DomainEventInterface[] */
+    public function getDomainEvents(): array;
 }
